@@ -11,7 +11,13 @@ figure; hold on;
 %               2D plot, using the option 'k+' for the positive
 %               examples and 'ko' for the negative examples.
 %
+pos = find(y==1); neg = find(y==0);
 
+plot(X(pos,1), X(pos,2), 'k+','LineWidth', 2, 'MarkerSize', 7);
+%X([1;2;3],1) means X的第1,2,3行的每行第一列元素即(1,1)(2,1)(3,1)
+
+
+plot(X(neg,1), X(neg,2), 'ko','MarkerFaceColor','y','MarkerSize',7);
 
 
 

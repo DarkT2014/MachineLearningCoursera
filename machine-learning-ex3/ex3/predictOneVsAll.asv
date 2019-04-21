@@ -31,16 +31,10 @@ X = [ones(m, 1) X];
 %       
 
 
-mul = X * all_theta';
-s = sigmoid(mul);
-[acr,p] = max(s, [], 2);
-%acr is max val of each row, while p is the index of the max val in each
-%row
+mul = X * theta';
+s = si
 
 
-
-% disp("the val of p is:");
-% disp(size(p));
 
 
 

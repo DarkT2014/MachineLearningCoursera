@@ -54,29 +54,24 @@ X = [ones(m, 1) X];
 %in a matrix  K*(N+1) , where each row of  corresponds to the learned
 %logistic regression parameters for one class.
 
-initial_theta = zeros(n+1, 1);
+initial_theta = zeros(1, );
 
 %Set options for fminunc
 options = optimset('GradObj', 'on', 'MaxIter', 50);
 
 for i = 1:num_labels
-%     if i == 10
-%         [all_theta(i,:)] = ...
-%             fmincg (@(t)(lrCostFunction(t, X, (y == 0), lambda)), ...
-%                     initial_theta, options);
-%     else
-%         [all_theta(i,:)] = ...
-%             fmincg (@(t)(lrCostFunction(t, X, (y == i), lambda)), ...
-%                     initial_theta, options);
-%     end
-    [all_theta(i,:)] = ...
+    if i == 10
+        [all_theta(i,:)] = ...
+            fmincg (@(t)(lrCostFunction(t, X, (y == 0), lambda)), ...
+                    initial_theta, options);
+    else
+        [all_theta(i,:)] = ...
             fmincg (@(t)(lrCostFunction(t, X, (y == i), lambda)), ...
                     initial_theta, options);
-end                
-                
-                
-% disp("the size of alltheta is : ");
-% disp(size(all_theta));
+    end
+
+
+
 
 
 % =========================================================================

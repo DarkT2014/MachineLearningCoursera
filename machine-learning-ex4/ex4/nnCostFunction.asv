@@ -64,7 +64,7 @@ Theta2_grad = zeros(size(Theta2));
 
 
 % d = size(X,1);
-X = [ones(m,1) X];
+X = [ones(size(X,1),1) X];
 tmp = X * Theta1';
 tmp = [ones(size(tmp, 1), 1) tmp];
 hx = tmp * Theta2';
@@ -74,15 +74,11 @@ hx = tmp * Theta2';
 tmpy = zeros(size(y,1),num_labels);
 for i = 1:size(y,1)
     tmpy(i,y(i)) = 1;
-end
-    
-
-size(tmpy)
 
 %tmpy 5000x10
 
-J = - tmpy .* log(hx) - (1 - tmpy) .* log(1-hx);
-J = sum(sum(J))/m;
+
+
 
 
 

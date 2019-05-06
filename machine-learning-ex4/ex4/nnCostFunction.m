@@ -65,9 +65,9 @@ Theta2_grad = zeros(size(Theta2));
 
 % d = size(X,1);
 X = [ones(m,1) X];
-tmp = X * Theta1';
+tmp = sigmoid(X * Theta1');
 tmp = [ones(size(tmp, 1), 1) tmp];
-hx = tmp * Theta2';
+hx = sigmoid(tmp * Theta2');
 %hx 5000x10 
 
 

@@ -107,8 +107,10 @@ for i = 1:m
     Delta1 = Delta1 + d2' * a1(i,:); %26x400
     Delta2 = Delta2 + d3' * a2(i,:); %10x26
     
-Theta1_grad = Delta1/m;
-Theta2_grad = Delta2/m;
+end
+
+Theta1_grad = Delta1/m + (lambda/m) * [zeros(size(t1,1),1) t1];
+Theta2_grad = Delta2/m + (lambda/m) * [zeros(size(t2,1),1) t2];
 
 
 

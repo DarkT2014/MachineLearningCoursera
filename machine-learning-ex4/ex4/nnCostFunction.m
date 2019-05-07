@@ -62,28 +62,53 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% part 1
 
-% d = size(X,1);
 X = [ones(m,1) X];
-tmp = sigmoid(X * Theta1');
-tmp = [ones(size(tmp, 1), 1) tmp];
-hx = sigmoid(tmp * Theta2');
-%hx 5000x10 
+a1 = X;%5000x401
+z2 = X * Theta1';
+a2 = sigmoid(z2);%5000x25
 
+a2 = [ones(size(a2,1), 1) a2];%5000x26
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);%5000x10
+hx = a3;
+%hx 5000x10 
 
 tmpy = zeros(size(y,1),num_labels);
 for i = 1:size(y,1)
     tmpy(i,y(i)) = 1;
 end
-    
-
-size(tmpy)
 
 %tmpy 5000x10
 
 J = - tmpy .* log(hx) - (1 - tmpy) .* log(1-hx);
-J = sum(sum(J))/m;
 
+t1 = Theta1(:,2:end);
+t2 = Theta2(:,2:end);
+
+J = sum(sum(J))/m;
+J = J + lambda * (sum(sum(t1.^2)) + sum(sum(t2.^2)))/(2*m);
+
+
+%--------------------------------------------------------
+% part II
+
+
+Delta1 = zeros(size(Theta1));
+Delta2 = zeros(size(Theta2));
+% size(t1)
+
+for i = 1:m
+    d3 = a3(i,:) - tmpy(i,:);%d3 1x10
+    d2 = d3 * Theta2 .* sigmoidGradient([1, z2(i,:)]);%1x26
+    d2 = d2(2:end);
+    
+    Delta1 = Delta1 + d2' * a1(i,:); %26x400
+    Delta2 = Delta2 + d3' * a2(i,:); %10x26
+    
+Theta1_grad = Delta1/m;
+Theta2_grad = Delta2/m;
 
 
 
